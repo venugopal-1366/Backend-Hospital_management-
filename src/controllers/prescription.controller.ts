@@ -10,6 +10,12 @@ export const create = async (req: Request, res: Response) => {
   }
 };
 
+export const getAll = async (_req: Request, res: Response) => {
+  const prescriptions = await service.getAllPrescriptions();
+  res.json(prescriptions);
+};
+
+
 export const getByAppointment = async (req: Request, res: Response) => {
   res.json(
     await service.getPrescriptionsByAppointment(

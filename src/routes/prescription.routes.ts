@@ -4,6 +4,7 @@ import {
   getByAppointment,
   update,
   remove,
+  getAll, // ✅ NEW
 } from "../controllers/prescription.controller";
 import { authMiddleware } from "../middlewares/auth.middleware";
 import { roleMiddleware } from "../middlewares/role.middleware";
@@ -58,6 +59,25 @@ router.post(
   authMiddleware,
   roleMiddleware("DOCTOR"),
   create
+);
+
+/**
+ * @swagger
+ * /api/prescriptions:
+ *   get:
+ *     summary: Get all prescriptions
+ *     tags: [Prescriptions]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of prescriptions
+ */
+router.get(
+  "/",
+  authMiddleware,
+  roleMiddleware("DOCTOR"),
+  getAll
 );
 
 /**

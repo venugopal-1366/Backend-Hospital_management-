@@ -20,6 +20,12 @@ export const getPrescriptionsByAppointment = async (
   return rows;
 };
 
+export const getAllPrescriptions = async () => {
+  const { rows } = await pool.query("SELECT * FROM prescriptions");
+  return rows;
+};
+
+
 export const updatePrescription = async (id: number, data: any) => {
   const { rows } = await pool.query(
     `UPDATE prescriptions
