@@ -9,8 +9,6 @@ import {
 from "../schema/patient.schema";
 
 const router = Router();
-router.post("/", authMiddleware, roleMiddleware("ADMIN"), validate(createPatientSchema), create);
-router.put("/:id", authMiddleware, roleMiddleware("ADMIN"), validate(updatePatientSchema), update);
 
 
 /**
@@ -56,6 +54,7 @@ router.post(
   "/",
   authMiddleware,
   roleMiddleware("ADMIN"),
+  validate(createPatientSchema),
   create
 );
 
@@ -74,7 +73,7 @@ router.post(
 router.get(
   "/",
   authMiddleware,
-  roleMiddleware("ADMIN", "DOCTOR"),
+  roleMiddleware("ADMIN"),
   getAll
 );
 
@@ -99,7 +98,7 @@ router.get(
 router.get(
   "/:id",
   authMiddleware,
-  roleMiddleware("ADMIN", "DOCTOR"),
+  roleMiddleware("ADMIN"),
   getById
 );
 

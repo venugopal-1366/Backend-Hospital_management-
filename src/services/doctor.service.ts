@@ -24,7 +24,7 @@ export const getDoctorById = async (id: number) => {
     `SELECT d.*, u.name, u.email
      FROM doctors d
      JOIN users u ON d.user_id = u.id
-     WHERE d.id = $1`,
+     WHERE d.doctor_id = $1`,
     [id]
   );
   return rows[0];
@@ -35,7 +35,7 @@ export const updateDoctor = async (id: number, data: any) => {
     `UPDATE doctors
      SET specialization = $1,
          experience = $2
-     WHERE id = $3
+     WHERE doctor_id = $3
      RETURNING *`,
     [data.specialization, data.experience, id]
   );
@@ -43,5 +43,5 @@ export const updateDoctor = async (id: number, data: any) => {
 };
 
 export const deleteDoctor = async (id: number) => {
-  await pool.query("DELETE FROM doctors WHERE id = $1", [id]);
+  await pool.query("DELETE FROM doctors WHERE doctor_id = $1", [id]);
 };

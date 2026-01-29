@@ -11,13 +11,12 @@ import prescriptionRoutes from "./routes/prescription.routes";
 
 const app = express();
 
+app.use(cors());
+app.use(express.json());
+
 app.use("/api/patients", patientRoutes);
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/prescriptions", prescriptionRoutes);
-
-
-app.use(cors());
-app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/appointments", appointmentRoutes);

@@ -10,8 +10,6 @@ import {
 
 
 const router = Router();
-router.post("/", authMiddleware, roleMiddleware("ADMIN"), validate(createDoctorSchema), create);
-router.put("/:id", authMiddleware, roleMiddleware("ADMIN"), validate(updateDoctorSchema), update);
 
 /**
  * @swagger
@@ -56,6 +54,7 @@ router.post(
   "/",
   authMiddleware,
   roleMiddleware("ADMIN"),
+  validate(createDoctorSchema),
   create
 );
 
@@ -71,7 +70,7 @@ router.post(
  *       200:
  *         description: List of doctors
  */
-router.get("/", authMiddleware, getAll);
+router.get("/", authMiddleware, roleMiddleware("ADMIN"), getAll);
 
 /**
  * @swagger
@@ -91,7 +90,7 @@ router.get("/", authMiddleware, getAll);
  *       200:
  *         description: Doctor details
  */
-router.get("/:id", authMiddleware, getById);
+router.get("/:id", authMiddleware, roleMiddleware("ADMIN"), getById);
 
 /**
  * @swagger

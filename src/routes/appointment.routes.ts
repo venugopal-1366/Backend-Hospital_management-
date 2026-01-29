@@ -15,8 +15,6 @@ import {
 } from "../schema/appointment.schema";
 
 const router = Router();
-router.post("/", authMiddleware, roleMiddleware("PATIENT"), validate(createAppointmentSchema), create);
-router.put("/:id", authMiddleware, roleMiddleware("DOCTOR", "ADMIN"), validate(updateAppointmentSchema), update);
 /**
  * @swagger
  * tags:
@@ -36,7 +34,7 @@ router.put("/:id", authMiddleware, roleMiddleware("DOCTOR", "ADMIN"), validate(u
  *       200:
  *         description: List of appointments
  */
-router.get("/", authMiddleware, getAll);
+router.get("/", authMiddleware, roleMiddleware("PATIENT"), getAll);
 
 /**
  * @swagger
@@ -56,7 +54,7 @@ router.get("/", authMiddleware, getAll);
  *       200:
  *         description: Appointment details
  */
-router.get("/:id", authMiddleware, getById);
+router.get("/:id", authMiddleware, roleMiddleware("PATIENT"), getById);
 
 /**
  * @swagger
@@ -91,6 +89,7 @@ router.post(
   "/",
   authMiddleware,
   roleMiddleware("PATIENT"),
+  validate(createAppointmentSchema),
   create
 );
 

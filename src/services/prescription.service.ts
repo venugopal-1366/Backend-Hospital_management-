@@ -31,7 +31,7 @@ export const updatePrescription = async (id: number, data: any) => {
     `UPDATE prescriptions
      SET medicines = $1,
          notes = $2
-     WHERE id = $3
+     WHERE prescription_id = $3
      RETURNING *`,
     [data.medicines, data.notes, id]
   );
@@ -39,5 +39,5 @@ export const updatePrescription = async (id: number, data: any) => {
 };
 
 export const deletePrescription = async (id: number) => {
-  await pool.query("DELETE FROM prescriptions WHERE id = $1", [id]);
+  await pool.query("DELETE FROM prescriptions WHERE prescription_id = $1", [id]);
 };
